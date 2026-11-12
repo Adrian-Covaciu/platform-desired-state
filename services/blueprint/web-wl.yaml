@@ -3,4 +3,4 @@ type: api
 image: busybox:latest
 replicas: 1
 env_variables:
-  - Hello = "World"
+  Hello: World

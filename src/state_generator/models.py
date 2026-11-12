@@ -11,10 +11,11 @@ class Workload(BaseModel):
     type: Literal["api", "cronjob"]
     image: str
     replicas: int = 1
-    env_variables: dict
+    schedule: str | None = None
+    env_variables: dict | None = None
 
 class Service(BaseModel):
     name: str
     workloads: list[Workload]
-    resources: list[Resource]
+    # resources: list[Resource]
 

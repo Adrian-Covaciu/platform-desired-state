@@ -24,8 +24,10 @@ root/
 ├── src/                      # Main source code
 │   └── generator/        
 │       ├── __init__.py
+|       ├── main.py                 # Entrypoint for the project
 │       ├── models.py               # Pydantic models
-|       ├── parser_workload.py      # Parser YAML -> Python for Workloads
+|       ├── yaml_parser.py          # Parser YAML -> Python for Workloads
+|       ├── k8s_generator.py        # Generator for k8s resources
 ├── .gitignore            # Files and directories to ignore in git
 └── README.md             # Project documentation
 └── pyproject.toml        # Poetry dependency manager

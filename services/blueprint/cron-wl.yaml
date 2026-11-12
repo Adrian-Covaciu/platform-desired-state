@@ -1,0 +1,4 @@
+name: test-cronjob
+type: cronjob
+image: busybox:latest
+schedule: "* * * * *"

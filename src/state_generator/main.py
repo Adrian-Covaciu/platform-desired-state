@@ -1,6 +1,6 @@
 from models import *
-from parser import *
+from yaml_parser import *
 
 if __name__ == "__main__":
-    service_obj = parse_service("blueprint")
-    print(service_obj)
+    service = parse_service("blueprint")
+    print(service)

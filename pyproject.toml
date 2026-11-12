@@ -9,7 +9,9 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "pydantic (>=2.14.3,<3.0.0)",
-    "pyyaml (>=6.0.3,<7.0.0)"
+    "pyyaml (>=6.0.3,<7.0.0)",
+    "cdk8s (>=2.70.122,<3.0.0)",
+    "constructs (>=10.8.1,<11.0.0)"
 ]
 
 [build-system]

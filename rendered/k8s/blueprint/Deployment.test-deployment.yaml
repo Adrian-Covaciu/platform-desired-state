@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-deployment
+  name: test-deployment
+  namespace: blueprint
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deployment
+  template:
+    spec:
+      containers:
+        - env:
+            - name: Hello
+              value: World
+          image: busybox:latest
+          name: test-deployment

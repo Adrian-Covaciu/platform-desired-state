@@ -1,6 +1,6 @@
-from models import *
-from yaml_parser import *
+from k8s_generator import generate_service, generate_all_services
 
 if __name__ == "__main__":
-    service = parse_service("blueprint")
-    print(service)
+    generate_all_services()
+
+    

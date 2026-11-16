@@ -85,6 +85,18 @@ jsii = ">=1.139.0,<2.0.0"
 publication = ">=0.0.3"
 
 [[package]]
+name = "from-root"
+version = "1.3.0"
+description = "Forget about working directory errors"
+optional = false
+python-versions = ">=3.7,<4.0"
+groups = ["main"]
+files = [
+    {file = "from_root-1.3.0-py3-none-any.whl", hash = "sha256:7446a9b6481e668329cc11ad0a234fe4c83c63468c652e037d02846a75c726f8"},
+    {file = "from_root-1.3.0.tar.gz", hash = "sha256:da1359f5faabca367f685cac927cb2f307bb35c488fdd0361f963d6f1cd2674f"},
+]
+
+[[package]]
 name = "jsii"
 version = "1.142.0"
 description = "Python client for jsii runtime"
@@ -446,5 +458,5 @@ files = [
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.14"
-content-hash = "a05490356b151c1066d9db6c2fa13bae11dbb8499e7465e76c23e4e7d6cf884e"
+python-versions = ">=3.14,<4.0"
+content-hash = "76c90ce5038f6ab54e0cb13d1420535bd3afd575a5b7c5b9d51848eef13c800d"

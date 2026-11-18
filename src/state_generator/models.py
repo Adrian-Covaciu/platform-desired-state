@@ -13,6 +13,7 @@ class Workload(BaseModel):
     replicas: int = 1
     schedule: str | None = None
     env_variables: dict | None = None
+    config_map: dict | None = None
 
 class Service(BaseModel):
     name: str

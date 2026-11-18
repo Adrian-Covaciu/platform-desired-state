@@ -1,6 +1,7 @@
 from constructs import Construct
 from imports import k8s
 from models import Workload
+import yaml
 
 
 class K8sWorkload(Construct):
@@ -36,4 +37,15 @@ class Api(K8sWorkload):
                                )
                            )
                         )
+        if workload.config_map:
+            k8s.KubeConfigMap(
+                self, 'config',
+                metadata=k8s.ObjectMeta(
+                    name=workload.name,
+                    namespace=service_namespace
+                ),
+                data={
+                    'config.yaml': yaml.safe_dump(workload.config_map)
+                }
+            )
         

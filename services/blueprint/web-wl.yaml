@@ -4,3 +4,7 @@ image: busybox:latest
 replicas: 1
 env_variables:
   Hello: World
+
+config_map:
+  PORT: 80
+  HOST: example.com

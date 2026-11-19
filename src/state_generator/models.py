@@ -12,6 +12,8 @@ class Workload(BaseModel):
     image: str
     replicas: int = 1
     schedule: str | None = None
+    container_port: int | None = None
+    service_port: int | None = None
     env_variables: dict | None = None
     config_map: dict | None = None
 

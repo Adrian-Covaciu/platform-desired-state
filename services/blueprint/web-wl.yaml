@@ -5,6 +5,9 @@ replicas: 1
 env_variables:
   Hello: World
 
+container_port: 8080
+service_port: 80
+
 config_map:
   PORT: 80
   HOST: example.com

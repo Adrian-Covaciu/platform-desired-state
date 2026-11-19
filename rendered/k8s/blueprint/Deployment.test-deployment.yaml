@@ -18,3 +18,5 @@ spec:
               value: World
           image: busybox:latest
           name: test-deployment
+          ports:
+            - containerPort: 8080

@@ -12,40 +12,64 @@ class K8sWorkload(Construct):
         if workload.env_variables
         else None
         )
+        ports = (
+            [k8s.ContainerPort(container_port=workload.container_port)]
+            if workload.container_port
+            else None
+        )
         self.container = k8s.Container(
             name=workload.name,
             image=workload.image,
+            ports=ports,
             env=env_vars,
             )
 
 class Api(K8sWorkload):
     def __init__(self, scope: Construct, id: str, *, workload: Workload, service_namespace: str):
         super().__init__(scope, id, workload=workload)
-        k8s.KubeDeployment(self, "deployment",
-                           metadata=k8s.ObjectMeta(
-                                name=workload.name,
-                                namespace=service_namespace,
-                                labels={"app": workload.name},
-                            ),
-                           spec=k8s.DeploymentSpec(
-                               replicas=workload.replicas,
-                               selector=k8s.LabelSelector(match_labels={"app": workload.name}),
-                               template=k8s.PodTemplateSpec(
-                                   spec=k8s.PodSpec(
-                                       containers=[self.container]
-                                   )
-                               )
-                           )
-                        )
-        if workload.config_map:
-            k8s.KubeConfigMap(
-                self, 'config',
+        if workload.type == "api":
+            k8s.KubeDeployment(self, "deployment",
+                            metadata=k8s.ObjectMeta(
+                                    name=workload.name,
+                                    namespace=service_namespace,
+                                    labels={"app": workload.name},
+                                ),
+                            spec=k8s.DeploymentSpec(
+                                replicas=workload.replicas,
+                                selector=k8s.LabelSelector(match_labels={"app": workload.name}),
+                                template=k8s.PodTemplateSpec(
+                                    spec=k8s.PodSpec(
+                                        containers=[self.container]
+                                    )
+                                )
+                            )
+                            )
+            k8s.KubeService(self, "service",
                 metadata=k8s.ObjectMeta(
                     name=workload.name,
-                    namespace=service_namespace
+                    namespace=service_namespace,
+                    labels={"app": workload.name},
                 ),
-                data={
-                    'config.yaml': yaml.safe_dump(workload.config_map)
-                }
+                spec=k8s.ServiceSpec(
+                    type="ClusterIP",
+                    ports=[
+                        k8s.ServicePort(
+                            port=workload.service_port,
+                            target_port=k8s.IntOrString.from_number(workload.container_port),
+                        )
+                    ],
+                    selector={"app": workload.name},
+                ),
             )
+            if workload.config_map:
+                k8s.KubeConfigMap(
+                    self, 'config',
+                    metadata=k8s.ObjectMeta(
+                        name=workload.name,
+                        namespace=service_namespace
+                    ),
+                    data={
+                        'config.yaml': yaml.safe_dump(workload.config_map)
+                    }
+                )
         

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: test-cronjob
+  namespace: blueprint
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: busybox:latest
+              name: test-cronjob
+          restartPolicy: OnFailure
+  schedule: "* * * * *"

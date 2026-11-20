@@ -1,8 +1,13 @@
 from cdk8s import App, Chart, YamlOutputType
-from k8s_resources import Api
+from k8s_resources import Api, CronJob
 from yaml_parser import *
 from from_root import from_root
 import os
+
+WORKLOAD_TYPES: dict[str, type[Construct]] = {
+    "api": Api,
+    "cronjob": CronJob,
+}
 
 def generate_service(service_name):
     outdir = from_root(f"rendered/k8s/{service_name}")
@@ -10,7 +15,8 @@ def generate_service(service_name):
     chart = Chart(app, service_name)
     parsed_service = parse_service(service_name)
     for workload in parsed_service.workloads:
-        Api(chart, workload.name, workload=workload, service_namespace=parsed_service.name)
+        workload_class = WORKLOAD_TYPES[workload.type]
+        workload_class(chart, workload.name, workload=workload, service_namespace=parsed_service.name)
     app.synth()
 
 def generate_all_services():

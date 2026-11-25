@@ -9,7 +9,6 @@ Decisions made for this implementation:
 ---
 
 ## Repository Structure
-
 ```text
 root/
 ├── .github/                  # GitHub workflows and actions
@@ -28,7 +27,17 @@ root/
 │       ├── models.py               # Pydantic models
 |       ├── yaml_parser.py          # Parser YAML -> Python for Workloads
 |       ├── k8s_generator.py        # Generator for k8s resources
+|       ├── k8s_resources.py        # Container Constructors and Workload classes
 ├── .gitignore            # Files and directories to ignore in git
 └── README.md             # Project documentation
 └── pyproject.toml        # Poetry dependency manager
 └── poetry.lock           # Record of installed packages and dependencies
+
+---
+
+## How to run the K8s synth directly (Python >= 3.14 and Poetry required)
+Install dependencies and run the generator:
+```bash
+poetry install --no-root
+poetry run python src/state_generator/main.py
+```

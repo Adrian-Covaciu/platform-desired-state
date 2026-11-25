@@ -32,6 +32,7 @@ root/
 └── README.md             # Project documentation
 └── pyproject.toml        # Poetry dependency manager
 └── poetry.lock           # Record of installed packages and dependencies
+```
 
 ---
 
